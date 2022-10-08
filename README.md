@@ -1,7 +1,8 @@
 # Web_Scraping
+#
 
 ### The project can scrap huge amount of data from website.
-### Project scraps data from the following websites: <a href="https://www.pararius.com/" rel='nofollow'>pararius</a>  <a href="https://www.autolist.com/" rel='nofollow'>autolist</a>
+### These Projects scraped data from these following websites: <a href="https://www.pararius.com/" rel='nofollow'>pararius</a>  <a href="https://www.autolist.com/" rel='nofollow'>autolist</a>
 
 These Python scripts can scrap data from any website.<b />
 Following are the steps taken:-
@@ -12,7 +13,7 @@ Following are the steps taken:-
  
  #
  
- Data Scraped from the Tesla cars autolist are as follows:
+ Data Scraped from the autolist (Tesla_cars_info) are as follows:
  <ol><li>Model of the Car</li>
 <li>Mileage of the Car</li>
 <li>Year of Manufacturing</li>
@@ -21,7 +22,7 @@ Following are the steps taken:-
  
  #
                        
-It scraps the following details from housing website:
+It scraps the following details from pararius (Housing_info) website:
 <ol><li>Title of the Houses</li>
 <li>Location of the Houses</li>
 <li>Area of the Houses</li>
