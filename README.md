@@ -5,12 +5,26 @@
 
 These Python scripts can scrap data from any website.<b />
 Following are the steps taken:-
-                    <ol><li>Scrap url of a website</li>
+                    <ul><li>Scrap url of a website</li>
                         <li>Scrap Titles, Headings, Text from a website</li>
                         <li>Scrap Specific data like Person Emails, Sales, Finanicials and addresses</li>
-                        <li>Store scraped data into desired format file</li></ol>
+                        <li>Store scraped data into desired format file</li></ul>
+                        
+ 
+ Data Scraped from the Tesla cars autolist are as follows:
+ <ol><li>Model of the Car</li>
+<li>Mileage of the Car</li>
+<li>Year of Manufacturing</li>
+<li>Dealer Name of the Car</li>
+<li>City & State of availability from USA</ol>
+ 
+ 
                        
-It scraps the following details from website:
-1. Title 2. Area 3. Location 4. Price, of the houses
+It scraps the following details from housing website:
+<ol><li>Title of the Houses</li>
+<li>Location of the Houses</li>
+<li>Area of the Houses</li>
+<li>Price of the Houses</li></ol>
 
 
+#Python#BeautifulSoup#Requests#Pandas#CSV
