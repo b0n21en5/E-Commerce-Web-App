@@ -29,4 +29,4 @@ It scraps the following details from pararius (Housing_info) website:
 <li>Price of the Houses</li></ol>
 
 
-#Python#BeautifulSoup#Requests#Pandas#CSV
+#BeautifulSoup#Requests#Pandas
