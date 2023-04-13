@@ -1,0 +1,18 @@
+/* ========== footer styles =========== */
+
+.footer {
+  color: white;
+  padding: 25px;
+  background: linear-gradient(to right, #434343, #000);
+}
+
+.footer a {
+  text-decoration: none;
+  color: white;
+  padding: 5px 10px;
+}
+
+.footer a:hover {
+  color: #ffefba;
+  border-bottom: 1px solid #ffefba;
+}

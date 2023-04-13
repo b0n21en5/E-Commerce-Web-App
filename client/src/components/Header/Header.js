@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { RiShoppingCartFill } from "react-icons/ri";
+import "./header.css";
 
 const Header = () => {
   return (
