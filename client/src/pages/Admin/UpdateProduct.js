@@ -4,10 +4,10 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Select } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const { Option } = Select;
 
-const CreateProduct = () => {
+const UpdateProduct = () => {
   const [categories, setCategories] = useState([]);
   const [photos, setPhotos] = useState("");
   const [name, setName] = useState("");
@@ -16,8 +16,32 @@ const CreateProduct = () => {
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
+  const [id, setId] = useState("");
 
   const navigate = useNavigate();
+  const params = useParams();
+
+  // get single product
+  const getSingleProduct = async () => {
+    try {
+      const { data } = await axios.get(
+        `/api/v1/products/get-product/${params.slug}`
+      );
+      setName(data.product.name);
+      setId(data.product._id);
+      setDescription(data.product.description);
+      setPrice(data.product.price);
+      setQuantity(data.product.quantity);
+      setShipping(data.product.shipping);
+      setCategory(data.product.category._id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getSingleProduct();
+  }, []);
 
   // get all categories
   const getAllCategories = async () => {
@@ -37,7 +61,7 @@ const CreateProduct = () => {
   }, []);
 
   //  create product function
-  const handleCreate = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     try {
       const productData = new FormData();
@@ -47,9 +71,9 @@ const CreateProduct = () => {
       productData.append("quantity", quantity);
       productData.append("category", category);
       productData.append("shipping", shipping);
-      productData.append("photos", photos);
-      const { data } = await axios.post(
-        "/api/v1/products/create-product",
+      photos && productData.append("photos", photos);
+      const { data } = await axios.put(
+        `/api/v1/products/update-product/${id}`,
         productData
       );
       if (data?.success) {
@@ -64,6 +88,19 @@ const CreateProduct = () => {
     }
   };
 
+  // delete product function
+  const handleDelete = async () => {
+    try {
+      let answer = window.prompt("Do you really want to delete the product?");
+      if (!answer) return;
+      await axios.delete(`/api/v1/products/${id}`);
+      toast.success("Product Deleted Successfully");
+      navigate("/dashboard/admin/products");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Layout title={"Dashboard - Create Product"}>
       <div className="container-fluid m-3 p-3">
@@ -72,7 +109,7 @@ const CreateProduct = () => {
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <h1>Create Product</h1>
+            <h1>Update Product</h1>
             <div className="m-1 w-75">
               <Select
                 bordered={false}
@@ -83,6 +120,7 @@ const CreateProduct = () => {
                 onChange={(value) => {
                   setCategory(value);
                 }}
+                value={category}
               >
                 {categories?.map((c) => (
                   <Option key={c._id} value={c._id}>
@@ -105,10 +143,19 @@ const CreateProduct = () => {
                 </label>
               </div>
               <div className="mb-3">
-                {photos && (
+                {photos ? (
                   <div className="text-center">
                     <img
                       src={URL.createObjectURL(photos)}
+                      alt="product_photo"
+                      height={"200px"}
+                      className="img img-responsive"
+                    />
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <img
+                      src={`/api/v1/products/product-photo/${id}`}
                       alt="product_photo"
                       height={"200px"}
                       className="img img-responsive"
@@ -159,14 +206,20 @@ const CreateProduct = () => {
                   size="large"
                   className="form-select mb-3"
                   onChange={(value) => setShipping(value)}
+                  value={shipping ? "yes" : "no"}
                 >
                   <Option value="0">No</Option>
                   <Option value="1">Yes</Option>
                 </Select>
               </div>
               <div className="mb-3">
-                <button className="btn btn-primary" onClick={handleCreate}>
-                  CREATE PRODUCT
+                <button className="btn btn-primary" onClick={handleUpdate}>
+                  UPDATE PRODUCT
+                </button>
+              </div>
+              <div className="mb-3">
+                <button className="btn btn-danger" onClick={handleDelete}>
+                  DELETE PRODUCT
                 </button>
               </div>
             </div>
@@ -177,4 +230,4 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct;
+export default UpdateProduct;
