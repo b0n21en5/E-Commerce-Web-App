@@ -4,9 +4,16 @@ import { RiShoppingCartFill } from "react-icons/ri";
 import "./header.css";
 import { useAuth } from "../../../context/auth";
 import { toast } from "react-hot-toast";
+import SearchInput from "../../Form/SearchInput";
+import useCategory from "../../../hooks/useCategory";
+import { useCart } from "../../../context/cart";
+import { ClockCircleOutlined } from "@ant-design/icons";
+import { Avatar, Badge, Space } from "antd";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
+  const categories = useCategory();
+  const [cart] = useCart();
 
   const handleLogout = () => {
     setAuth({
@@ -38,25 +45,37 @@ const Header = () => {
               <RiShoppingCartFill /> ECOMMERCE APP
             </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <SearchInput />
               <li className="nav-item">
-                <NavLink
-                  to="/"
-                  className="nav-link"
-                  aria-current="page"
-                  href="#"
-                >
+                <NavLink to="/" className="nav-link" aria-current="page">
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink
-                  to="/category"
-                  className="nav-link"
-                  aria-current="page"
+              <li className="nav-item dropdown">
+                <Link
+                  to={"/categories"}
+                  className="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
                 >
-                  Category
-                </NavLink>
+                  Categories
+                </Link>
+                <ul className="dropdown-menu">
+                  <Link to={`/categories`} className="dropdown-item">
+                    All Categories
+                  </Link>
+                  {categories?.map((c) => (
+                    <li key={c._id}>
+                      <Link
+                        to={`/category/${c.slug}`}
+                        className="dropdown-item"
+                      >
+                        {c.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </li>
+
               {!auth.user ? (
                 <>
                   <li className="nav-item">
@@ -75,11 +94,9 @@ const Header = () => {
                   <li className="nav-item dropdown">
                     <NavLink
                       className="nav-link dropdown-toggle"
-                      href="#"
-                      id="navbarScrollingDropdown"
                       role="button"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
+                      style={{ border: "none" }}
                     >
                       {auth?.user?.name}
                     </NavLink>
@@ -108,9 +125,11 @@ const Header = () => {
                 </>
               )}
               <li className="nav-item">
-                <NavLink to="/cart" className="nav-link">
-                  Cart (0)
-                </NavLink>
+                <Badge count={cart?.length} showZero>
+                  <NavLink to="/cart" className="nav-link">
+                    Cart
+                  </NavLink>
+                </Badge>
               </li>
             </ul>
           </div>

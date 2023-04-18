@@ -5,9 +5,12 @@ import {
   deleteProductController,
   getPhotosController,
   getProductController,
+  productCategoryController,
   productCountController,
   productFiltersController,
   productListController,
+  searchProductController,
+  similarProductsController,
   singleProductController,
   updateProductController,
 } from "../controllers/productController.js";
@@ -53,5 +56,14 @@ router.get("/product-count", productCountController);
 
 // product per page
 router.get("/product-list/:page", productListController);
+
+// search product route
+router.get("/search/:keyword", searchProductController);
+
+// similar product route
+router.get("/similar-products/:pid/:cid", similarProductsController);
+
+// category wise product
+router.get("/product-category/:slug", productCategoryController);
 
 export default router;
