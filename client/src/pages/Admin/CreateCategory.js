@@ -27,7 +27,6 @@ const CreateCategory = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
       toast.error("something went wrong!");
     }
   };
@@ -40,7 +39,6 @@ const CreateCategory = () => {
         setCategories(data?.category);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong in getting category");
     }
   };
@@ -67,7 +65,6 @@ const CreateCategory = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong!");
     }
   };
@@ -85,14 +82,13 @@ const CreateCategory = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong!");
     }
   };
 
   return (
     <Layout title={"Dashboard - Create Category"}>
-      <div className="container-fluid m-3 p-3">
+      <div className="container-fluid m-3 p-3 dashboard">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
