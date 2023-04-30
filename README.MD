@@ -1,6 +1,6 @@
 # Live Site: <a href="https://fantastic-fez-deer.cyclic.app/">E-Commerce-Web-App</a>
 
-![]()
+![](https://github.com/b0n21en5/E-Commerce-Web-App/blob/main/client/public/images/screenshot.gif)
 
 <hr>
 
