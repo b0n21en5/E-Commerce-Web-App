@@ -7,8 +7,7 @@ import { toast } from "react-hot-toast";
 import SearchInput from "../../Form/SearchInput";
 import useCategory from "../../../hooks/useCategory";
 import { useCart } from "../../../context/cart";
-import { ClockCircleOutlined } from "@ant-design/icons";
-import { Avatar, Badge, Space } from "antd";
+import { Badge } from "antd";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();

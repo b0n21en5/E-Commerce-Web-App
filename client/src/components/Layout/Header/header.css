@@ -7,6 +7,7 @@
   box-shadow: 0 8px 6px -6px gray;
   --webkit-box-shadow: 0 8px 6px -6px gray;
   border-bottom: 0px solid gray !important;
+  background: #1a1818;
 }
 
 .nav-link {

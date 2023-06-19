@@ -1,11 +1,9 @@
 import Layout from "../components/Layout/Layout";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 import useCategory from "../hooks/useCategory";
 
 const Categories = () => {
   const categories = useCategory();
-  const [] = useState();
 
   return (
     <Layout>
