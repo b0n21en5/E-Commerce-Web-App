@@ -1,5 +1,6 @@
 import express from "express";
 import colors from "colors";
+import compression from "compression";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./config/db.js";
@@ -27,12 +28,27 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(express.static(path.join(__dirname, "./client/build")));
+app.use(compression());
 
 // routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/products", productRoutes);
+
+let options = {
+  etag: true,
+  maxAge: 31536000,
+  redirect: true,
+  setHeaders: function (res, path, stat) {
+    // any other header in response
+    res.set({
+      "x-timestamp": Date.now(),
+      joseph: "hi",
+    });
+  },
+};
+
+app.use(express.static(path.join(__dirname, "./client/build"), options));
 
 // rest api
 app.use("*", function (req, res) {

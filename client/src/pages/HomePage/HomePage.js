@@ -106,14 +106,28 @@ const HomePage = () => {
     <Layout title={"All Products - Best Offers"}>
       {/* banner image */}
       <img
-        src="/images/banner.png"
+        src="/images/banner.webp"
         className="banner-img"
-        alt="bannerimage"
-        width={"100%"}
+        alt="banner"
+        width="100%"
+        height="100%"
       />
       <div className="container-fluid row mt-3 home-page">
         <div className="col-md-3 filters">
-          <h4 className="text-center">Filter By Category</h4>
+          {/*  price filter */}
+          <h4 className="text-center">Filter By Price</h4>
+          <div className="d-flex flex-column">
+            <Radio.Group onChange={(e) => setRadio(e.target.value)}>
+              {Prices?.map((p) => (
+                <div key={p._id}>
+                  <Radio value={p.array}>{p.name}</Radio>
+                </div>
+              ))}
+            </Radio.Group>
+          </div>
+
+          {/* category filter */}
+          <h4 className="text-center mt-4">Filter By Category</h4>
           <div className="d-flex flex-column">
             {categories?.map((c) => (
               <Checkbox
@@ -125,17 +139,6 @@ const HomePage = () => {
             ))}
           </div>
 
-          {/*  price filter */}
-          <h4 className="text-center mt-4">Filter By Price</h4>
-          <div className="d-flex flex-column">
-            <Radio.Group onChange={(e) => setRadio(e.target.value)}>
-              {Prices?.map((p) => (
-                <div key={p._id}>
-                  <Radio value={p.array}>{p.name}</Radio>
-                </div>
-              ))}
-            </Radio.Group>
-          </div>
           <div className="d-flex flex-column">
             <button
               onClick={() => window.location.reload()}
@@ -154,17 +157,18 @@ const HomePage = () => {
                   src={`/api/v1/products/product-photo/${p._id}`}
                   className="card-img-top"
                   alt={p.name}
+                  height="300px"
                 />
                 <div className="card-body">
                   <div className="card-name-price">
                     <h5 className="card-title">{p.name}</h5>
-                    <h5 className="card-title card-price">
-                      ${" "}
+                    <h6 className="card-title card-price">
+                      {" "}
                       {p.price.toLocaleString("en-US", {
                         style: "currency",
                         currency: "USD",
                       })}
-                    </h5>
+                    </h6>
                   </div>
                   <p className="card-text">
                     {p.description.substring(0, 60)}...

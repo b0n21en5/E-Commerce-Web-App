@@ -43,14 +43,14 @@
 }
 
 .home-page .card-img-top {
-  height: 300px !important;
+  height: 280px !important;
 }
 /* ==================
   filters
   ============== */
 .filters h4 {
   margin-top: 100px;
-  color: gray !important;
+  color: #595959 !important;
   border-bottom: 1px solid rgba(128, 128, 128, 0.337);
 }
 
