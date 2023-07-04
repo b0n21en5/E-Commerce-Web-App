@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import HomePage from "./pages/HomePage/HomePage";
+import ProductPage from "./pages/ProductPage/ProductPage";
 
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
@@ -37,6 +38,7 @@ function App() {
       <Suspense fallback={<h2>Loading...</h2>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/product-page/:slug" element={<ProductPage />} />
           <Route path="/search" element={<Search />} />
           <Route path="/product/:slug" element={<ProductDetails />} />
           <Route path="/category/:slug" element={<CategoryProduct />} />
