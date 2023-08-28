@@ -24,31 +24,32 @@ const __dirname = path.dirname(__filename);
 //rest objects
 const app = express();
 
+const setCachingHeaders = (req, res, next) => {
+  if (req.method === "GET") {
+    const cacheTime = 604800;
+    const expiryDate = new Date(Date.now() + cacheTime * 1000);
+
+    res.setHeader("Cache-Control", `public,max-age=${cacheTime}`);
+    res.setHeader("Expires", expiryDate.toUTCString());
+  }
+  next();
+};
+
 //middlewares
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(compression());
+app.use(setCachingHeaders);
 
 // routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/products", productRoutes);
 
-let options = {
-  etag: true,
-  maxAge: 31536000,
-  redirect: true,
-  setHeaders: function (res, path, stat) {
-    // any other header in response
-    res.set({
-      "x-timestamp": Date.now(),
-      joseph: "hi",
-    });
-  },
-};
-
-app.use(express.static(path.join(__dirname, "./client/build"), options));
+app.use(
+  express.static(path.join(__dirname, "./client/build"), { maxAge: 604800 })
+);
 
 // rest api
 app.use("*", function (req, res) {
